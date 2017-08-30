@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.libertymutual.goforcode.wimp.models.Actor;
+import com.libertymutual.goforcode.wimp.models.ActorWithMovies;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 
 @RestController
@@ -24,8 +25,8 @@ public class ActorApiController {
 	public ActorApiController(ActorRepository actorRepo) {
 		this.actorRepo = actorRepo;
 		
-		actorRepo.save(new Actor("Curtis", "Schlak"));
-		actorRepo.save(new Actor("Kalea", "Wolff"));
+//		actorRepo.save(new Actor("Curtis", "Schlak"));
+//		actorRepo.save(new Actor("Kalea", "Wolff"));
 	}
 	
 	@GetMapping("")
@@ -39,6 +40,14 @@ public class ActorApiController {
 		if (actor == null) {
 			throw new StuffNotFoundException();
 		}
+//		ActorWithMovies newActor = new ActorWithMovies();
+//		newActor.setId(actor.getId());
+//		newActor.setActiveSinceYear(actor.getActiveSinceYear());
+//		newActor.setBirthDate(actor.getBirthDate());
+//		newActor.setFirstName(actor.getFirstName());
+//		newActor.setLastName(actor.getLastName());
+//		newActor.setMovies(actor.getMovies());
+//		
 		return actor;
 	}
 	
