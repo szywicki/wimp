@@ -17,8 +17,12 @@ import com.libertymutual.goforcode.wimp.models.Movie;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 import com.libertymutual.goforcode.wimp.repositories.MovieRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/movies")
+@Api(description="Use this to get and create movies and add actors to movies.")
 public class MovieApiController {
 
 	private MovieRepository movieRepo;
@@ -35,10 +39,12 @@ public class MovieApiController {
 //		movieRepo.save(movie);
 	}
 	
+	@ApiOperation("gets movie by id and the actors related to that movie.")
 	@PostMapping("{movieId}/actors")
 	public Movie associateAnActor(@PathVariable long movieId, @RequestBody Actor actor) {
 		 Movie movie = movieRepo.findOne(movieId);
-		 actor = actorRepo.findOne(actor.getId());
+		 Long actorId = actor.getId();
+		 actor = actorRepo.findOne(actorId);
 		 
 		 movie.addActor(actor);
 		 movieRepo.save(movie);
@@ -46,11 +52,13 @@ public class MovieApiController {
 		 return movie;
 	}
 	
+	@ApiOperation("Gets list of movies.")
 	@GetMapping("")
 	public List<Movie> getAll() {
 		return movieRepo.findAll();
 	}
 	
+	@ApiOperation("Gets movie by id.")
 	@GetMapping("{id}")
 	public Movie getOne(@PathVariable long id) throws StuffNotFoundException {
 		Movie movie = movieRepo.findOne(id);
@@ -60,17 +68,21 @@ public class MovieApiController {
 		return movie;
 	}
 	
+	@ApiOperation("Creates a movie.")
 	@PostMapping("")
 	public Movie create(@RequestBody Movie movie) {
 		return movieRepo.save(movie);
 	}
 	
+	@ApiOperation(value="Gets movie by id and updates changes.",
+					notes="you only need to POST the id of the movie")
 	@PutMapping("{id}")
 	public Movie update(@RequestBody Movie movie, @PathVariable long id) throws StuffNotFoundException {
 		movie.setId(id);
 		return movieRepo.save(movie);
 	}
 	
+	@ApiOperation("Gets movie by id and deletes. Returns null if id not found.")
 	@DeleteMapping("{id}")
 	public Movie deleteOne(@PathVariable long id) {
 		try {

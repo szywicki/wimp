@@ -16,8 +16,12 @@ import com.libertymutual.goforcode.wimp.models.Actor;
 import com.libertymutual.goforcode.wimp.models.ActorWithMovies;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/actors")
+@Api(description="Use this to get and create actors.")
 public class ActorApiController {
 
 	private ActorRepository actorRepo;
@@ -29,11 +33,13 @@ public class ActorApiController {
 //		actorRepo.save(new Actor("Kalea", "Wolff"));
 	}
 	
+	@ApiOperation("Gets list of actors.")
 	@GetMapping("")
 	public List<Actor> getAll() {
 		return actorRepo.findAll();
 	}
 	
+	@ApiOperation("Find actor by id. Throws exception if id not found.")
 	@GetMapping("{id}")
 	public Actor getOne(@PathVariable long id) throws StuffNotFoundException{
 		Actor actor = actorRepo.findOne(id);
@@ -51,6 +57,7 @@ public class ActorApiController {
 		return actor;
 	}
 	
+	@ApiOperation("Find actor by id and deletes it. Returns null if id not found.")
 	@DeleteMapping("{id}")
 	public Actor deleteOne(@PathVariable long id) {
 		try {
@@ -61,12 +68,14 @@ public class ActorApiController {
 			return null;
 	}
 	}
-		
+	
+	@ApiOperation("Creates an actor and saves it.")
 	@PostMapping("")
 	public Actor create(@RequestBody Actor actor) {
 		return actorRepo.save(actor);
 	}
 	
+	@ApiOperation("Updates an actor and saves changes.")
 	@PutMapping("{id}")
 	public Actor update(@RequestBody Actor actor, @PathVariable long id) throws StuffNotFoundException {
 		actor.setId(id);
