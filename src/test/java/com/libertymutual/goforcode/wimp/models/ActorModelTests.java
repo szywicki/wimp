@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,12 +51,6 @@ public class ActorModelTests {
 		assertThat(actor.getId()).isSameAs(3l);
 	}
 	
-//	@Test
-//	public void test_getActiveSinceYear_returns_activeSinceYear() {
-//		actor.setActiveSinceYear(2005l);
-//		actor.getActiveSinceYear();
-//		assertThat(actor.getActiveSinceYear()).isSameAs(2005l);
-//		
-//	}
 
+	
 }
