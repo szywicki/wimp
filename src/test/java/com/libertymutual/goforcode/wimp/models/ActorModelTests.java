@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -15,16 +16,25 @@ import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 
 public class ActorModelTests {
 
-	private ActorRepository actorRepo;
 	private Actor actor;
 	
 	
 	@Before
 	public void setUp() {
-		actorRepo = mock(ActorRepository.class);
 		actor = new Actor();
 	}
 	
+	@Test
+	public void test_constructor() {
+		// Arrange
+		Actor actor = new Actor ("Sylvester", "Stallone");
+		
+		// Assert
+		assertThat(actor.getFirstName()).isEqualTo("Sylvester");
+		assertThat(actor.getLastName()).isEqualTo("Stallone");
+				
+			
+	}
 		
 	@Test
 	public void test_firstName_and_lastName() {
@@ -57,6 +67,17 @@ public class ActorModelTests {
 		assertThat(actor.getId()).isSameAs(3l);
 	}
 	
-
+	@Test
+	public void test_get_and_set_movies() {
+		// Arrange
+		List<Movie> movies = new ArrayList<Movie>();
+		actor.setMovies(movies);
+		
+		// Act
+		actor.getMovies();
+		
+		// Assert
+		assertThat(actor.getMovies()).isSameAs(movies);
+	}
 	
 }

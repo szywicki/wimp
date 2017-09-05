@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.libertymutual.goforcode.wimp.models.Actor;
-import com.libertymutual.goforcode.wimp.models.ActorWithMovies;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 
 import io.swagger.annotations.Api;
